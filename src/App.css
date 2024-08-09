@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "BMJUA";
+  src: url(./fonts/BMJUA_ttf.ttf);
+}
+
+body{
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'BMJUA';
+  line-height: 1.6;
+  width: 100%;
+  max-width: 1200px;
+  background-color: blue;
+}

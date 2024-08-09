@@ -18,6 +18,11 @@ const Nav = () => {
         setClicked2(false);
         setClicked3(false);
         setClicked4(false);
+      } else if(pathname === '/diary'){
+        setClicked1(false);
+        setClicked2(true);
+        setClicked3(false);
+        setClicked4(false);
       }
     
       
@@ -38,7 +43,8 @@ const Nav = () => {
                 <NavImg
                     src='icons/diary.png'
                     alt='diary'
-                    onClick={() => (window.location.href = "/home")}
+                    onClick={() => (window.location.href = "/diary")}
+                    clicked={clicked2}
                 />
             </NavButton>
             <NavButton>

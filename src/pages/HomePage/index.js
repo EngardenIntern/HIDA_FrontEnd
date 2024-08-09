@@ -5,6 +5,10 @@ import Setting from '../../components/Setting'
 import Message from '../../components/Message'
 
 const HomePage = () => {
+
+    console.log(new Date());
+
+
     return (
         <Container>
             <Setting />

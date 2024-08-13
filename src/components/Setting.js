@@ -27,10 +27,9 @@ const SettingWrapper = styled.div`
   left: 0;
   right: 0;
   height: 70px; // 높이
-  background-color: skyblue;
   align-items: center; // 수직 중앙
   padding: 0 36px;
-  letter-spacing: 16px;
+  letter-spacing: 2px;
   z-index: 3;
   display: flex;
 `

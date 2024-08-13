@@ -3,8 +3,11 @@ import styled from 'styled-components'
 import Nav from '../../components/Nav';
 import PageTitle from '../../components/PageTitle';
 import DiaryItem from './DiaryItem';
+import { useNavigate } from 'react-router-dom';
+import Container from '../../components/Container';
 
 const DiaryPage = () => {
+    const navigate = useNavigate();
     return (
         <Container>
             <PageTitle>일기장</PageTitle>
@@ -15,16 +18,20 @@ const DiaryPage = () => {
                 ></DiaryItem>
                 <DiaryItem
                     date='2024-08-10'
-                    title='오늘은 내 생일이야'
+                    title='오늘은 내 생일이야 즐거워 완전'
                 ></DiaryItem>
                 <DiaryItem
                     date='2024-08-11'
                     title='맘마미아'
                 ></DiaryItem>
+                <DiaryItem
+                    date='2024-08-12'
+                    title='효니최고!!!!'
+                ></DiaryItem>
             </ListWrapper>
             <PlusImg
                 src='icons/plus.png'
-                onClick={() => (window.location.href = "/diary")}
+                onClick={() => (navigate('/diary/new'))}
             />
             <Nav />
         </Container>
@@ -33,17 +40,6 @@ const DiaryPage = () => {
 
 export default DiaryPage
 
-
-const Container = styled.main`
-  position: relative;
-  width: 100%;
-  max-width: 768px;
-  height: 100vh;
-  background-color: orange;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-`;
 
 const PlusImg = styled.img`
     position: absolute;
@@ -57,7 +53,7 @@ const ListWrapper = styled.div`
     width: 90%;
     height: calc((100vh - (100px + 120px + 7vh)));
     top: 100px;
-    background-color: purple;
+    background-color: green;
     display: flex;
     flex-direction: column-reverse;
 `

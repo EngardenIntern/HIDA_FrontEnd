@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 
 
 const DiaryItem = (props) => {
 
+    const naviagtion = useNavigate();
+
     const [day, setDay] = useState("");
     const [date, setDate] = useState("");
+    
 
     useEffect(() => {
-        console.log(new Date());
         let dayNum = new Date(props.date).getDay();
         let dateNum = new Date(props.date).getDate();
         setDate(dateNum >= 10 ? dateNum : "0" + dateNum);
-
-
-        console.log('daynum', date);
 
         switch (dayNum) {
             case 0:
@@ -40,7 +40,7 @@ const DiaryItem = (props) => {
     return (
         <div>
             <ItemWrapper
-                count="0"
+                onClick={() => naviagtion("/diary/detail")}
             >
                 <DateWrapper>
                     <DiaryDay>{day}</DiaryDay>

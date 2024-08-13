@@ -3,11 +3,9 @@ import styled from 'styled-components'
 import Nav from '../../components/Nav'
 import Setting from '../../components/Setting'
 import Message from '../../components/Message'
+import Container from '../../components/Container'
 
 const HomePage = () => {
-
-    console.log(new Date());
-
 
     return (
         <Container>
@@ -36,23 +34,12 @@ const HomePage = () => {
 
 export default HomePage
 
-const Container = styled.main`
-  position: relative;
-  width: 100%;
-  max-width: 768px;
-  height: 100vh;
-  background-color: orange;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-`;
-
 const PetWrapper = styled.div`
     position: absolute;
     width: 80%;
     height: 50vh;
     top: 25vh;
-    background-color: purple;
+    background-color: skyblue;
     margin: 0 auto;
 `;
 
@@ -61,14 +48,18 @@ const PetImg = styled.img`
     height: 20vh;
     display: block;
     position: absolute;
+    
     left: 50%;
-    transform: translateX(-50%);
+    top: 50%;
+    transform: translate(-50%,-50%);
     padding: 10px;
 `;
 
 const MessageWrapper = styled.div`
     position: absolute;
+    width: 100%;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
+    background-color: orange;
 `;

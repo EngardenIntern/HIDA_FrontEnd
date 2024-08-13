@@ -33,7 +33,7 @@ const Nav = () => {
         <NavWrapper>
             <NavButton>
                 <NavImg
-                    src='icons/heart.png'
+                    src='/icons/heart.png'
                     alt='heart'
                     onClick={() => (window.location.href = "/home")}
                     clicked={clicked1}
@@ -41,7 +41,7 @@ const Nav = () => {
             </NavButton>
             <NavButton>
                 <NavImg
-                    src='icons/diary.png'
+                    src='/icons/diary.png'
                     alt='diary'
                     onClick={() => (window.location.href = "/diary")}
                     clicked={clicked2}
@@ -49,14 +49,14 @@ const Nav = () => {
             </NavButton>
             <NavButton>
                 <NavImg
-                    src='icons/calendar.png'
+                    src='/icons/calendar.png'
                     alt='calendar'
                     onClick={() => (window.location.href = "/home")}
                 />
             </NavButton>
             <NavButton>
                 <NavImg
-                    src='icons/chat.png'
+                    src='/icons/chat.png'
                     alt='chat'
                     onClick={() => (window.location.href = "/home")}
                 />
@@ -86,12 +86,13 @@ const NavWrapper = styled.nav`
 const NavButton = styled.div`
     width: 50px;
     height: 50px;
-    background-color: red;
 `;
 
 const NavImg = styled.img`
     width: 100%;
     height: 100%;
-    opacity: ${props => props.clicked ? 1 : 0.5} 
+    opacity: ${props => props.clicked ? 1 : 0.5};
+    font-family: 'sans-serif';
+    letter-spacing: 2px;
 `;
 

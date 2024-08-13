@@ -13,3 +13,7 @@ body{
   max-width: 1200px;
   background-color: blue;
 }
+p{
+  margin: 0;
+  padding: 0;
+}

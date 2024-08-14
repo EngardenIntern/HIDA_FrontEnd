@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Container from '../../components/Container'
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +12,7 @@ import CompleteBtn from '../../components/CompleteBtn';
 import Body from '../../components/Body';
 import Nav from '../../components/Nav';
 
-const NewDiaryPage = () => {
+const NewDiaryPage = (props) => {
 
   const navigation = new useNavigate();
   const [diaryDate, setDiaryDate] = useState(new Date());
@@ -91,7 +91,8 @@ const DateWrapper = styled.div`
       border: 1px solid #ccc;
       font-size: 30px;
       font-family: 'BMJUA';
-      background-color: green;
+      background-color: transparent;
+      border-block: none;
     }
   }
 `;
@@ -99,7 +100,7 @@ const DateWrapper = styled.div`
 const TitleInput = styled.input`
   position: absolute;
   width: 100%;
-  height: 10vh;
+  height: 15%;
   box-sizing: border-box;
   font-size: 24px
 `;
@@ -109,6 +110,6 @@ const DetailInput = styled.textarea`
   bottom: 0px;
   width: 100%;
   box-sizing: border-box;
-  height: calc( 70vh - 5px );
+  height: calc(85% - 5px);
   font-size: 24px;
 `;

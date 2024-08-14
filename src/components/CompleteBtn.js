@@ -7,6 +7,9 @@ const CompleteBtn = (props) => {
   return (
     <BtnText
         onClick={() =>(window.location.href = `${props.path}`)}
+        date = {props.date}
+        title = {props.title}
+        detail = {props.detail}
     >
         {props.children}
     </BtnText>

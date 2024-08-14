@@ -8,12 +8,13 @@ import styled from 'styled-components'
 import Body from '../../components/Body'
 import Separator from '../../components/Separator'
 import Nav from '../../components/Nav'
+import { useLocation } from 'react-router-dom'
 
 
 const DiaryDetailPage = () => {
 
-
-    const date = "2024-08-08"
+    const location = useLocation();
+    const date = `${location.state.date}`
     const title = "요즘 같은 날"
     const detail = "아껴둔 말을 되짚어 보고 있어 대뜸 그 말에 너가 지을 표정 궁금해져 난 당장 너에게 가고 싶은 마음이야 요즘 같은 날에 그게 숨겨진다면 거짓말이야 속는 게 아닐까 했어 pretty face에 맞는 걸까 되뇌었지 수십 회 애써 외면해버리고 motivation에 다시 몰입해 보려고 해도 어느새, yeah 확인하고 있는 폰의 채팅창엔 네 이름이 If you don't mean it, baby, sto-stop playin' with me Shawty, tell me you wanna walk the same way, too 왜냐면 맘에 들어 너의 스타일과 작은 tattoos Yeah, 너랑 있을 때면 느껴 좋은 에너지 재미 없어졌어 이제 club에서의 fling 친구들에게 네 얘길 하면 좋아 보인대"
 
@@ -76,7 +77,6 @@ const DiaryDetailPage = () => {
                                 break;
                         }
 
-                        console.log("reply", reply.comment);
                         return (
                             <EmotionWrapper key={reply.emotion}>
                                 {imgSrc && (
@@ -126,7 +126,7 @@ const Title = styled.p`
 `
 
 const Detail = styled.p`
-    font-size: 20px;
+    font-size: 16px;
     margin: 10px 0;
     overflow-y: scroll;
     width: 80%;

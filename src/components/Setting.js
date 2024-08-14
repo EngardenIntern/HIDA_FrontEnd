@@ -1,7 +1,10 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 
 const Setting = () => {
+
+    const navigation = useNavigate();
 
     return (
 
@@ -12,7 +15,7 @@ const Setting = () => {
             <SettingImg
                 src='icons/setting.png'
                 alt='setting'
-                onClick={() => (window.location.href = "/setting")}
+                onClick={() => navigation("/setting")}
             />
         </SettingWrapper>
     );

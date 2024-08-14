@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 
 const Nav = () => {
+
+    const navigation = useNavigate();
 
     const {pathname} = useLocation();
 
@@ -23,9 +25,17 @@ const Nav = () => {
         setClicked2(true);
         setClicked3(false);
         setClicked4(false);
+      } else if(pathname === '/calendar'){
+        setClicked1(false);
+        setClicked2(false);
+        setClicked3(true);
+        setClicked4(false);
+      } else if(pathname === '/chat'){
+        setClicked1(false);
+        setClicked2(false);
+        setClicked3(false);
+        setClicked4(true);
       }
-    
-      
     }, [pathname])
     
 
@@ -35,7 +45,7 @@ const Nav = () => {
                 <NavImg
                     src='/icons/heart.png'
                     alt='heart'
-                    onClick={() => (window.location.href = "/home")}
+                    onClick={() => navigation("/home")}
                     clicked={clicked1}
                 />
             </NavButton>
@@ -43,7 +53,7 @@ const Nav = () => {
                 <NavImg
                     src='/icons/diary.png'
                     alt='diary'
-                    onClick={() => (window.location.href = "/diary")}
+                    onClick={() => navigation("/diary")}
                     clicked={clicked2}
                 />
             </NavButton>
@@ -51,14 +61,16 @@ const Nav = () => {
                 <NavImg
                     src='/icons/calendar.png'
                     alt='calendar'
-                    onClick={() => (window.location.href = "/home")}
+                    onClick={() => navigation("/calendar")}
+                    clicked={clicked3}
                 />
             </NavButton>
             <NavButton>
                 <NavImg
                     src='/icons/chat.png'
                     alt='chat'
-                    onClick={() => (window.location.href = "/home")}
+                    onClick={() => navigation("/chat")}
+                    clicked={clicked4}
                 />
             </NavButton>
             

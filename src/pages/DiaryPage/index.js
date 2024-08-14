@@ -13,7 +13,7 @@ const DiaryPage = () => {
             <PageTitle>일기장</PageTitle>
             <ListWrapper>
                 <DiaryItem
-                    date='2024-08-9'
+                    date='2024-08-8'
                     title='비가 와 오랜만에'
                 ></DiaryItem>
                 <DiaryItem

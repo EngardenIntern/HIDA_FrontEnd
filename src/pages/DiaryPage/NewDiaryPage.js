@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Container from '../../components/Container'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from "date-fns/locale/ko";
@@ -13,10 +13,22 @@ import Body from '../../components/Body';
 import Nav from '../../components/Nav';
 
 const NewDiaryPage = (props) => {
-
+  
   const navigation = new useNavigate();
-  const [diaryDate, setDiaryDate] = useState(new Date());
+  
+  
+  const location = useLocation();
+  console.log('location: ', location);
+  const locationTitle = location.state ? location.state.title : '';
+  const locationDetail = location.state ? location.state.detail : '';
+  const locationDate = location.state ? location.state.date : new Date();
+
+  const [title, setTitle] = useState(locationTitle);
+  const [detail, setDetail] = useState(locationDetail);
+
+  const [diaryDate, setDiaryDate] = useState(locationDate);
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
+
 
   const handleMonthChange = (date) => {
     setSelectedMonth(date.getMonth());
@@ -49,25 +61,30 @@ const NewDiaryPage = (props) => {
       </Header>
 
       <Body>
-        <form>
+        <Form>
           <TitleInput
+            type='text'
+            value={title ?? ''}
+            onChange={(e) => setTitle(e.target.value)}
             placeholder='제목을 입력해주세요.(최대 30자)'
             required={true}
             maxLength={30}
             style={{ fontFamily: 'BMJUA' }}
           />
           <Separator
-            width = '300px'
+            width = '100%'
             height = '5px'
             backgroundColor='orange'
           />
           <DetailInput
+            value={detail ?? ''}
+            onChange={(e) => setDetail(e.target.value)}
             placeholder='내용을 입력해주세요.(최대 500자)'
             required={true}
             maxLength={500}
             style={{ fontFamily: 'BMJUA' }}
           />
-        </form>
+        </Form>
       </Body>
       <Nav />
     </Container>
@@ -98,7 +115,6 @@ const DateWrapper = styled.div`
 `;
 
 const TitleInput = styled.input`
-  position: absolute;
   width: 100%;
   height: 15%;
   box-sizing: border-box;
@@ -106,10 +122,13 @@ const TitleInput = styled.input`
 `;
 
 const DetailInput = styled.textarea`
-  position: absolute;
   bottom: 0px;
   width: 100%;
   box-sizing: border-box;
   height: calc(85% - 5px);
   font-size: 24px;
+`;
+
+const Form = styled.form`
+  height: 100%;
 `;

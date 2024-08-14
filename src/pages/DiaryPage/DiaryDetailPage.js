@@ -9,30 +9,60 @@ import Body from '../../components/Body'
 import Separator from '../../components/Separator'
 import Nav from '../../components/Nav'
 import { useLocation } from 'react-router-dom'
+import axios from '../../api/axios.js'
 
 
 const DiaryDetailPage = () => {
 
+
     const location = useLocation();
     const date = `${location.state.date}`
-    const title = "요즘 같은 날"
-    const detail = "아껴둔 말을 되짚어 보고 있어 대뜸 그 말에 너가 지을 표정 궁금해져 난 당장 너에게 가고 싶은 마음이야 요즘 같은 날에 그게 숨겨진다면 거짓말이야 속는 게 아닐까 했어 pretty face에 맞는 걸까 되뇌었지 수십 회 애써 외면해버리고 motivation에 다시 몰입해 보려고 해도 어느새, yeah 확인하고 있는 폰의 채팅창엔 네 이름이 If you don't mean it, baby, sto-stop playin' with me Shawty, tell me you wanna walk the same way, too 왜냐면 맘에 들어 너의 스타일과 작은 tattoos Yeah, 너랑 있을 때면 느껴 좋은 에너지 재미 없어졌어 이제 club에서의 fling 친구들에게 네 얘길 하면 좋아 보인대"
+    const [title, setTitle] = useState("");
+    const [detail, setDetail] = useState("");
+    const [EmotionComment, setEmotionComment] = useState([]);
+    const [MotherComment, setMotherComment] = useState("");
 
-
-    const [EmotionReply, setEmotionReply] = useState([]);
-    const [MotherReply, setMotherReply] = useState("");
-
+    const userId = 1;
+    const [diary, setDiary] = useState("");
 
     useEffect(() => {
-        setEmotionReply([
-            { emotion: "JOY", comment: "아!! 폰에서 네 이름을 확인한 순간! 심장이 터질 것 같았어! 정말 같이 걷고 싶어!" },
-            { emotion: "SADNESS", comment: "네 마음이 진짜인지 물어봤어... 장난치지 말라고 부탁했는데도 불안해😭 자꾸 확인하고만 있어... 너무 힘들어😔" }
-        ]);
+      fetchDiary();
+    }, [])
 
-        setMotherReply("지금 느끼시는 혼란스러운 감정은 정말 자연스러운 것 같아요. 누군가에게 끌리고, 그 감정을 직면하면서도 다른 일에 집중하기 어려운 것이 나타나네요. 그런 감정은 우리의 진정한 바람을 알려주는 신호일 수 있어요. 조금 더 솔직하게 자신의 감정을 받아들이고, 그 사람과의 관계에서 진정한 마음을 나누어 보세요. 항상 당신의 감정을 존중하는 마음 잊지 마세요!")
+    useEffect(() => {
+        setTitle(diary.title);
+        setDetail(diary.detail);
+    }, [diary])
+    
+    const fetchDiary = async () => {
+        const response = await axios.get(`/diary/${userId}/${date}`);
+        console.log('response', response);
+        const diary = transformData(response.data);
+        setDiary(diary);
 
-    }, []);
+        const emotionsJson = JSON.parse(response.data.emotions);
+        const emotions = transformEmotions(emotionsJson);
+        console.log('emotions', emotions);
+        setEmotionComment(emotions);
+        setMotherComment(response.data.mom);
+    }
 
+    const transformData = (data) => {
+        return {
+            date: data.date,
+            aiStatus: data.aiStatus,
+            userName: data.userName,
+            title: data.title,
+            detail: data.detail,
+        };
+    }
+
+    const transformEmotions = (data) => {
+        return data.map(entry => ({
+            emotion: entry.emotion,
+            comment: entry.comment,
+        }))
+    }
 
     
     return (
@@ -44,11 +74,19 @@ const DiaryDetailPage = () => {
                 </DateWrapper>
                 <CompleteBtn
                     path='/diary/new'
+                    date={date}
+                    title={title}
+                    detail={detail}
                 >
                     수정
                 </CompleteBtn>
             </Header>
             <Body>
+                <Separator
+                    width='100%'
+                    height='5px'
+                    backgroundColor='orange'
+                />
                 <DiaryWrapper>
                     <Title>
                         {title}
@@ -56,11 +94,16 @@ const DiaryDetailPage = () => {
                     <Detail>
                         {detail}
                     </Detail>
-                </DiaryWrapper>
+                </DiaryWrapper><Separator
+                    width='100%'
+                    height='5px'
+                    backgroundColor='orange'
+                />
                 <ReplyWrapper>
-                    {EmotionReply.map((reply) => {
+                    
+                    {EmotionComment.map((comment) => {
                         let imgSrc = '';
-                        switch (reply.emotion) {
+                        switch (comment.emotion) {
                             case 'JOY':
                                 imgSrc = '/images/joy.png';
                                 break;
@@ -78,11 +121,11 @@ const DiaryDetailPage = () => {
                         }
 
                         return (
-                            <EmotionWrapper key={reply.emotion}>
+                            <EmotionWrapper key={comment.emotion}>
                                 {imgSrc && (
                                     <>
                                         <EmotionImg src={imgSrc} />
-                                        <EmotionComment>{reply.comment}</EmotionComment>
+                                        <Emotion>{comment.comment}</Emotion>
                                     </>
                                 )}
                             </EmotionWrapper>
@@ -90,10 +133,10 @@ const DiaryDetailPage = () => {
                     })}
 
                     <MotherWrapper>
-                        <MotherComment>
+                        <Mother>
 
-                            {MotherReply}
-                        </MotherComment>
+                            {MotherComment}
+                        </Mother>
                         <MotherImg
                             src='/images/mother.png'
                         />
@@ -153,7 +196,8 @@ const ReplyWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     overflow-y: scroll;
-    gap: 20px
+    gap: 10px;
+    padding: 10px 0px;
 `
 const MotherWrapper = styled.div`
     width: 80%;
@@ -163,9 +207,10 @@ const MotherWrapper = styled.div`
     align-items: center;
     border-radius: 20px;
     padding: 0 10px;
+    margin 5px;
 `;
 
-const MotherComment = styled.p`
+const Mother = styled.p`
     font-size: 14px;
 `;
 const MotherImg = styled.img`
@@ -180,8 +225,7 @@ const EmotionWrapper = styled.div`
     border-radius: 20px;
     background-color: violet;
     padding: 0 10px;
-    gap: 10px;
-`
+`;
 
 const EmotionImg = styled.img`
     height: 70px;
@@ -189,6 +233,6 @@ const EmotionImg = styled.img`
     margin-left: 10px;
 `;
 
-const EmotionComment = styled.p`
+const Emotion = styled.p`
     font-size: 14px;
 `;

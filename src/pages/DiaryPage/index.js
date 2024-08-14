@@ -1,33 +1,48 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Nav from '../../components/Nav';
 import PageTitle from '../../components/PageTitle';
 import DiaryItem from './DiaryItem';
 import { useNavigate } from 'react-router-dom';
 import Container from '../../components/Container';
+import axios from '../../api/axios.js'
 
 const DiaryPage = () => {
     const navigate = useNavigate();
+
+    const userId = 1;
+    const [diaryList, setDiaryList] = useState([]);
+
+    useEffect(() => {
+        fetchDiaryList();
+    }, [])
+
+    const fetchDiaryList = async () => {
+        const response = await axios.get(`/diary/${userId}`);
+        const list = transformData(response.data);
+        setDiaryList(list);
+    }
+
+    const transformData = (data) => {
+        return data
+            .map(entry => ({
+                date: entry.date,
+                title: entry.title,
+            }));
+    }
+
     return (
         <Container>
             <PageTitle>일기장</PageTitle>
             <ListWrapper>
-                <DiaryItem
-                    date='2024-08-8'
-                    title='비가 와 오랜만에'
-                ></DiaryItem>
-                <DiaryItem
-                    date='2024-08-10'
-                    title='오늘은 내 생일이야 즐거워 완전'
-                ></DiaryItem>
-                <DiaryItem
-                    date='2024-08-11'
-                    title='맘마미아'
-                ></DiaryItem>
-                <DiaryItem
-                    date='2024-08-12'
-                    title='효니최고!!!!'
-                ></DiaryItem>
+                {diaryList.map((diary) => {
+                    return (
+                        <DiaryItem
+                            date={diary.date}
+                            title={diary.title}
+                        />
+                    )
+                })}
             </ListWrapper>
             <PlusImg
                 src='icons/plus.png'
@@ -56,4 +71,5 @@ const ListWrapper = styled.div`
     background-color: green;
     display: flex;
     flex-direction: column-reverse;
+    overflow-y: scroll;
 `

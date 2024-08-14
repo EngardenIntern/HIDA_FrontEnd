@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const Separator = (props) => {
 
   return (
-    <Line />
+    <Line {...props}/>
   )
 }
 
@@ -16,13 +16,10 @@ const Line = styled.div`
     height: ${(props) => props.height};
     border-radius: 3px;
     background-color: ${(props) => props.backgroundColor};
-    z-index: 10;
-    left: 50%;
-    transform: translateX(-50%);
 `;
 
 Separator.defaultProps = {
     width: '100%',
-    height: '100%',
+    height: '5px',
     backgroundColor: 'black',
 }

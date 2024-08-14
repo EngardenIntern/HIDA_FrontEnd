@@ -8,24 +8,38 @@ import "react-calendar/dist/Calendar.css";
 import styled from 'styled-components'
 import { formatDate } from 'date-fns'
 import { useNavigate } from 'react-router-dom'
+import axios from '../../api/axios.js'
+
 
 const CalendarPage = () => {
 
-    const [checked, setChecked] = useState([]);
     const navigation = useNavigate();
 
 
+    const userId = 1;
+    const [dateList, setDateList] = useState([]);
+
     useEffect(() => {
-        
-        setChecked(["2024-08-08", "2024-08-11"]);
-    
+        fetchDateList();
     }, [])
+
+    const fetchDateList = async () => {
+        const response = await axios.get(`/diary/${userId}`);
+        const list = transformData(response.data);
+        setDateList(list);
+        console.log('dateList', list);
+    }
+
+    const transformData = (data) => {
+        return data
+            .map(entry => entry.date);
+    }
     
 
     const tileContent = ({date, view}) => {
         if(view === 'month'){
             const dateString = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-            if(checked.includes(dateString)){
+            if(dateList.includes(dateString)){
                 return <StyledDot />;
             }
         }
@@ -39,7 +53,7 @@ const CalendarPage = () => {
     const tileDisabled = ({ date, view }) => {
         if (view === 'month') {
             const dateString = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-            return !checked.includes(dateString); // checked 배열에 포함되지 않은 날짜는 비활성화
+            return !dateList.includes(dateString); // dateList 배열에 포함되지 않은 날짜는 비활성화
         }
         return false;
     };

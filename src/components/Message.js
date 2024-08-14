@@ -30,7 +30,7 @@ export default Message
 
 const MessageText = styled.p`
   padding: 20px;
-  border-radius: 20%;
+  border-radius: 20px;
   text-align: center;
   margin: 
 `

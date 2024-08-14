@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Separator = (props) => {
-    console.log('props', props);
 
   return (
     <Line />

@@ -8,13 +8,14 @@ const DiaryItem = (props) => {
     const naviagtion = useNavigate();
 
     const [day, setDay] = useState("");
+    const [dateNum, setDateNum] = useState("");
     const [date, setDate] = useState("");
     
 
     useEffect(() => {
         let dayNum = new Date(props.date).getDay();
         let dateNum = new Date(props.date).getDate();
-        setDate(dateNum >= 10 ? dateNum : "0" + dateNum);
+        setDateNum(dateNum >= 10 ? dateNum : "0" + dateNum);
 
         switch (dayNum) {
             case 0:
@@ -37,14 +38,21 @@ const DiaryItem = (props) => {
         }
     }, [props])
 
+    useEffect(() => {
+        let year = new Date(props.date).getFullYear();
+        let month = new Date(props.date).getMonth() + 1;
+        month = month >= 10 ? month : "0" + month;
+        setDate(year + "-" + month + "-" + dateNum);
+    }, [dateNum])
+
     return (
         <div>
             <ItemWrapper
-                onClick={() => naviagtion("/diary/detail")}
+                onClick={() => naviagtion("/diary/detail", {state: {date: date}})}
             >
                 <DateWrapper>
                     <DiaryDay>{day}</DiaryDay>
-                    <DiaryDate>{date}</DiaryDate>
+                    <DiaryDate>{dateNum}</DiaryDate>
                 </DateWrapper>
                 <Title>{props.title}</Title>
 

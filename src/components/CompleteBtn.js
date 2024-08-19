@@ -1,18 +1,11 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 
 
 const CompleteBtn = (props) => {
-  console.log(props);
-  const navigation = useNavigate();
-
   return (
     <BtnText
-        onClick={() =>navigation(`${props.path}`, {state: {date:props.date, title: props.title, detail: props.detail}})}
-        date = {props.date}
-        title = {props.title}
-        detail = {props.detail}
+        onClick={props.onClick}
     >
         {props.children}
     </BtnText>

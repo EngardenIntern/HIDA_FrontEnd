@@ -48,7 +48,7 @@ const DiaryItem = (props) => {
     return (
         <div>
             <ItemWrapper
-                onClick={() => naviagtion("/diary/detail", {state: {date: date}})}
+                onClick={() => naviagtion("/diary/detail", {state: {date: date, title: props.title}})}
             >
                 <DateWrapper>
                     <DiaryDay>{day}</DiaryDay>

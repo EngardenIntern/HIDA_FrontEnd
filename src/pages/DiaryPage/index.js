@@ -25,6 +25,7 @@ const DiaryPage = () => {
 
     const transformData = (data) => {
         return data
+            .sort((a, b) => new Date(b.date) - new Date(a.date))
             .map(entry => ({
                 date: entry.date,
                 title: entry.title,
@@ -43,6 +44,11 @@ const DiaryPage = () => {
                         />
                     )
                 })}
+
+                <DiaryItem
+                    date='2024-09-04'
+                    title='비가 오는 날엔'
+                />
             </ListWrapper>
             <PlusImg
                 src='icons/plus.png'

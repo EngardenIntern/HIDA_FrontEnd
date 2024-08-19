@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Container from '../../components/Container'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from "date-fns/locale/ko";
@@ -11,34 +11,90 @@ import ReturnBtn from '../../components/ReturnBtn';
 import CompleteBtn from '../../components/CompleteBtn';
 import Body from '../../components/Body';
 import Nav from '../../components/Nav';
+import axios from '../../api/axios.js'
+
 
 const NewDiaryPage = (props) => {
-  
+
   const navigation = new useNavigate();
-  
-  
+
   const location = useLocation();
-  console.log('location: ', location);
   const locationTitle = location.state ? location.state.title : '';
   const locationDetail = location.state ? location.state.detail : '';
   const locationDate = location.state ? location.state.date : new Date();
+  const locationMethod = location.state ? location.state.method : 'create';
 
   const [title, setTitle] = useState(locationTitle);
   const [detail, setDetail] = useState(locationDetail);
-
   const [diaryDate, setDiaryDate] = useState(locationDate);
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
 
+  const [date, setDate] = useState('');
+  const userId = 1;
 
   const handleMonthChange = (date) => {
     setSelectedMonth(date.getMonth());
   };
 
 
+  // diaryDate가 변경될 때마다 date 상태를 업데이트
+  useEffect(() => {
+    if (diaryDate instanceof Date && !isNaN(diaryDate)) {
+      const formattedDate = diaryDate.toISOString().split('T')[0];
+      setDate(formattedDate);
+    } else {
+      setDate(diaryDate);
+    }
+  }, [diaryDate]);
+
+  // date가 변경될 때마다 데이터를 가져옴
+  useEffect(() => {
+    if (date) {
+      fetchDayDiary(date);
+    }
+  }, [date]);
+
+  const fetchDayDiary = async (selectedDate) => {
+    try{
+      console.log('date', selectedDate);
+      const response = await axios.get(`/diary/${userId}/${selectedDate}`);
+      console.log('response', response);
+      const diary = transformData(response.data);
+      setTitle(diary.title);
+      setDetail(diary.detail);
+    } catch {
+      setTitle('');
+      setDetail('');
+      console.log("해당 날짜에는 데이터가 없습니다.");
+      return ;
+    }
+  }
+  const transformData = (data) => {
+    return {
+      title: data.title || '',
+      detail: data.detail || '',
+    };
+  }
+
+
+  const handleComplete = async () => {
+    try {
+      const createResopnse = await axios.post(`/diary`, {
+        userId: userId,
+        title: title,
+        detail: detail,
+        diaryDate: date,
+      });
+      console.log('Success', createResopnse)
+    } catch (error) {
+      console.error('Request Error:', error);
+    }
+    navigation('/diary');
+  };
   return (
     <Container>
       <Header>
-        <ReturnBtn/>
+        <ReturnBtn />
         <DateWrapper>
           <DatePicker
             selected={diaryDate}
@@ -54,7 +110,7 @@ const NewDiaryPage = (props) => {
           </DatePicker>
         </DateWrapper>
         <CompleteBtn
-          path= '/diary'
+          onClick={handleComplete}
         >
           완료
         </CompleteBtn>
@@ -72,8 +128,8 @@ const NewDiaryPage = (props) => {
             style={{ fontFamily: 'BMJUA' }}
           />
           <Separator
-            width = '100%'
-            height = '5px'
+            width='100%'
+            height='5px'
             backgroundColor='orange'
           />
           <DetailInput

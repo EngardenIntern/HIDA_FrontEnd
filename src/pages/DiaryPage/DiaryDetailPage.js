@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import Body from '../../components/Body'
 import Separator from '../../components/Separator'
 import Nav from '../../components/Nav'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import axios from '../../api/axios.js'
 
 
@@ -16,8 +16,10 @@ const DiaryDetailPage = () => {
 
 
     const location = useLocation();
+    const navigation = useNavigate();
     const date = `${location.state.date}`
-    const [title, setTitle] = useState("");
+    // const [title, setTitle] = useState("");
+    const title = `${location.state.title}`;
     const [detail, setDetail] = useState("");
     const [EmotionComment, setEmotionComment] = useState([]);
     const [MotherComment, setMotherComment] = useState("");
@@ -30,7 +32,7 @@ const DiaryDetailPage = () => {
     }, [])
 
     useEffect(() => {
-        setTitle(diary.title);
+        // setTitle(diary.title);
         setDetail(diary.detail);
     }, [diary])
     
@@ -64,7 +66,9 @@ const DiaryDetailPage = () => {
         }))
     }
 
-    
+    const handleUpdate = () => {
+        navigation('/diary/new', {state: {date:date, title:title, detail:detail, method:'update'}});
+    };
     return (
         <Container>
             <Header>
@@ -73,10 +77,7 @@ const DiaryDetailPage = () => {
                     {date}
                 </DateWrapper>
                 <CompleteBtn
-                    path='/diary/new'
-                    date={date}
-                    title={title}
-                    detail={detail}
+                    onClick={handleUpdate}
                 >
                     수정
                 </CompleteBtn>

@@ -14,6 +14,7 @@ import axios from '../../api/axios.js'
 
 const DiaryDetailPage = () => {
 
+    const userId = localStorage.getItem('userId');
 
     const location = useLocation();
     const navigation = useNavigate();
@@ -24,7 +25,6 @@ const DiaryDetailPage = () => {
     const [EmotionComment, setEmotionComment] = useState([]);
     const [MotherComment, setMotherComment] = useState("");
 
-    const userId = 1;
     const [diary, setDiary] = useState("");
 
     useEffect(() => {
@@ -172,7 +172,7 @@ const Title = styled.p`
 const Detail = styled.p`
     font-size: 16px;
     margin: 10px 0;
-    overflow-y: scroll;
+    overflow-y: auto;
     width: 80%;
     background-color: wheat;
 `
@@ -196,7 +196,7 @@ const ReplyWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-y: scroll;
+    overflow-y: auto;
     gap: 10px;
     padding: 10px 0px;
 `
@@ -207,7 +207,7 @@ const MotherWrapper = styled.div`
     position: relative;
     align-items: center;
     border-radius: 20px;
-    padding: 0 10px;
+    padding: 10px 10px;
     margin 5px;
 `;
 
@@ -231,7 +231,7 @@ const EmotionWrapper = styled.div`
 const EmotionImg = styled.img`
     height: 70px;
     width: 70px;
-    margin-left: 10px;
+    margin: 10px 10px 10px 0px;
 `;
 
 const Emotion = styled.p`

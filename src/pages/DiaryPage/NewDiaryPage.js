@@ -18,6 +18,8 @@ const NewDiaryPage = (props) => {
 
   const navigation = new useNavigate();
 
+  const userId = localStorage.getItem('userId');
+
   const location = useLocation();
   const locationTitle = location.state ? location.state.title : '';
   const locationDetail = location.state ? location.state.detail : '';
@@ -30,7 +32,6 @@ const NewDiaryPage = (props) => {
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
 
   const [date, setDate] = useState('');
-  const userId = 1;
 
   const handleMonthChange = (date) => {
     setSelectedMonth(date.getMonth());

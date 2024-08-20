@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 
-const Setting = () => {
+const Setting = (props) => {
 
     const navigation = useNavigate();
 
@@ -10,7 +10,7 @@ const Setting = () => {
 
         <SettingWrapper>
             <Count>
-                2 days
+                {props.count} days
             </Count>
             <SettingImg
                 src='icons/setting.png'

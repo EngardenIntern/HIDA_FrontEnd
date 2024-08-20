@@ -9,6 +9,7 @@ import CalendarPage from './pages/CalendarPage';
 import ChatPage from './pages/ChatPage';
 import LoginPage from './pages/StartPage/LoginPage';
 import SettingPage from './pages/SettingPage';
+import AuthPage from './pages/StartPage/AuthPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path='/' element={<StartPage />} />
           <Route path='/login' element={<LoginPage />} />
+          <Route path='/auth' element={<AuthPage />} />
 
           <Route path='/home' element={<HomePage />} />
           <Route path='/setting' element={<SettingPage />} />

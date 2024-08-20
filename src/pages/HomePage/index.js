@@ -1,15 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Nav from '../../components/Nav'
 import Setting from '../../components/Setting'
 import Message from '../../components/Message'
 import Container from '../../components/Container'
+import axios from '../../api/axios.js'
 
 const HomePage = () => {
 
+    const userId = localStorage.getItem('userId');
+
+    const [count, setCount] = useState(0);
+
+    useEffect(()=> {
+        fetchCount();
+    }, []);
+
+    const fetchCount = async () => {
+        const response = await axios.get(`/user/${userId}`);
+        setCount(response.data.diaryCount);
+    }
+
     return (
         <Container>
-            <Setting />
+            <Setting
+                count={count}
+            />
             <PetWrapper>
                 <PetImg
                     src='icons/pet_heart.png'

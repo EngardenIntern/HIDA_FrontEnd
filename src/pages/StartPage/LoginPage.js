@@ -1,9 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import Container from '../../components/Container'
+import { KAKAO_AUTH_URL } from '../../api/OAuth'
 
 const LoginPage = () => {
-  return (
+    console.log("kakao", KAKAO_AUTH_URL);
+    
+    return (
     <Container>
         <Announce>
             <Title>로그인</Title>
@@ -12,7 +15,7 @@ const LoginPage = () => {
 
         <KakaoLoginButton
             src="/icons/kakaoLogin.png"
-            onClick={() => (window.location.href = "/home")}
+            onClick={() => (window.location.href = `${KAKAO_AUTH_URL}`)}
         />
     </Container>
   )

@@ -15,8 +15,8 @@ const CalendarPage = () => {
 
     const navigation = useNavigate();
 
+    const userId = localStorage.getItem('userId');
 
-    const userId = 1;
     const [dateList, setDateList] = useState([]);
 
     useEffect(() => {
@@ -27,7 +27,6 @@ const CalendarPage = () => {
         const response = await axios.get(`/diary/${userId}`);
         const list = transformData(response.data);
         setDateList(list);
-        console.log('dateList', list);
     }
 
     const transformData = (data) => {

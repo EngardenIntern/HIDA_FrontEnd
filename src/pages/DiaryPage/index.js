@@ -10,7 +10,7 @@ import axios from '../../api/axios.js'
 const DiaryPage = () => {
     const navigate = useNavigate();
 
-    const userId = 1;
+    const userId = localStorage.getItem('userId');
     const [diaryList, setDiaryList] = useState([]);
 
     useEffect(() => {
@@ -44,11 +44,6 @@ const DiaryPage = () => {
                         />
                     )
                 })}
-
-                <DiaryItem
-                    date='2024-09-04'
-                    title='비가 오는 날엔'
-                />
             </ListWrapper>
             <PlusImg
                 src='icons/plus.png'
@@ -77,5 +72,5 @@ const ListWrapper = styled.div`
     background-color: green;
     display: flex;
     flex-direction: column-reverse;
-    overflow-y: scroll;
+    overflow-y: auto;
 `

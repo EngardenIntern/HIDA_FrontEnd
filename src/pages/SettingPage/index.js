@@ -13,7 +13,10 @@ const SettingPage = () => {
             <Body>
                 <MessageWarpper>
 
-                    <Message>개발 중 입니다.</Message>
+                    <Message
+                        backgroundColor='#FDF6F0'
+                    >개발 중 입니다.
+                    </Message>
                 </MessageWarpper>
             </Body>
             <Nav />
@@ -31,5 +34,5 @@ const MessageWarpper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: pink;
+    background-color: #FFD1D1;
 `;

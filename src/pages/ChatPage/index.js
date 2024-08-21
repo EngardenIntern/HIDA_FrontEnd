@@ -31,5 +31,5 @@ const MessageWarpper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: pink;
+    background-color: #FFD1D1;
 `;

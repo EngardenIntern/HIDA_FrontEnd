@@ -13,7 +13,7 @@ export default Header;
 const Section = styled.section`
   
   position: relative;
-  background-color: skyblue;
+  background-color: #FDF6F0;
   width: 100%;
   height: 70px;
   top: 30px;

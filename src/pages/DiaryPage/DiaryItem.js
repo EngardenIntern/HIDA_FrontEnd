@@ -81,13 +81,13 @@ const DateWrapper = styled.div`
 `;
 const DiaryDay = styled.p`
     top: 0;
-    background-color: red;
+    background-color: #D1E9F6;
     margin: 0;
     border-top-left-radius: 10px;
 
 `;
 const DiaryDate = styled.p`
-    background-color: blue;
+    background-color: #D1E9F6;
     font-size: 22px;
     margin: 0;
     border-bottom-left-radius: 10px;

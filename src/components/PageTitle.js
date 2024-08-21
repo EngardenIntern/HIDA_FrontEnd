@@ -18,7 +18,7 @@ const TitleWrapper = styled.div`
   left: 0;
   right: 0;
   height: 70px; // 높이
-  background-color: skyblue;
+  background-color: #FDF6F0;
   align-items: center; // 수직 중앙
   justify-content: center;
   padding: 0 36px;
@@ -29,7 +29,7 @@ const TitleWrapper = styled.div`
 
 const Title = styled.h1`
     font-size: 40px;
-    color: black;
+    color: #656565;
     margin: 0;
     text-align: center;
 `

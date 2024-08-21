@@ -39,7 +39,7 @@ const SettingWrapper = styled.div`
 
 const Count = styled.div`
     font-size: 24px;
-    color: white;
+    color: black;
     left: 0;
     margin-right: 10px;
 `

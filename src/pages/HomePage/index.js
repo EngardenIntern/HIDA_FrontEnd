@@ -35,7 +35,7 @@ const HomePage = () => {
                     <Message
                         width='70%'
                         height='80px'
-                        backgroundColor='white'
+                        backgroundColor='#FDF6F0'
                         color='black'
                         fontSize='20px'
                         fontFamily='BMJUA'
@@ -51,11 +51,13 @@ const HomePage = () => {
 export default HomePage
 
 const PetWrapper = styled.div`
+    border-radius: 50px;
+
     position: absolute;
     width: 80%;
     height: 50vh;
     top: 25vh;
-    background-color: skyblue;
+    background-color: #FDF6F0;
     margin: 0 auto;
 `;
 
@@ -72,10 +74,12 @@ const PetImg = styled.img`
 `;
 
 const MessageWrapper = styled.div`
+    border-radius: 50px;
+
     position: absolute;
     width: 100%;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    background-color: orange;
+    background-color: #FDF6F0;
 `;

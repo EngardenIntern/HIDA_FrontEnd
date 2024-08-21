@@ -15,7 +15,7 @@ const Wrapper = styled.main`
   width: 100%;
   max-width: 768px;
   height: 100vh;
-  background-color: pink;
+  background-color: #FFD1D1;
   margin: 0 auto;
   display: flex;
   justify-content: center;

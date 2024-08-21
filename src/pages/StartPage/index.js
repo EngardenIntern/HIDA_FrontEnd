@@ -45,7 +45,7 @@ const StartButton = styled.div`
     position: absolute;
     width: 60%;
     height: 8%;
-    background-color: orange;
+    background-color: #FF9494;
     border-radius: 20px;
     font-size: 24px;
     top: 60%;

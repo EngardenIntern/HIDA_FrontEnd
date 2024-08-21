@@ -69,7 +69,7 @@ const ListWrapper = styled.div`
     width: 90%;
     height: calc((100vh - (100px + 120px + 7vh)));
     top: 100px;
-    background-color: green;
+    background-color: #FFD1D1;
     display: flex;
     flex-direction: column-reverse;
     overflow-y: auto;

@@ -16,7 +16,7 @@ const Section = styled.section`
   width: 100%;
   height: calc(100vh - 210px); ;
   top: 100px;
-  background-color: green;
+  background-color: #FFD1D1;
   display: flex;
   flex-direction: column;
 `;

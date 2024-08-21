@@ -19,8 +19,7 @@ const DiaryDetailPage = () => {
     const location = useLocation();
     const navigation = useNavigate();
     const date = `${location.state.date}`
-    // const [title, setTitle] = useState("");
-    const title = `${location.state.title}`;
+    const [title, setTitle] = useState("");
     const [detail, setDetail] = useState("");
     const [EmotionComment, setEmotionComment] = useState([]);
     const [MotherComment, setMotherComment] = useState("");
@@ -32,7 +31,7 @@ const DiaryDetailPage = () => {
     }, [])
 
     useEffect(() => {
-        // setTitle(diary.title);
+        setTitle(diary.title);
         setDetail(diary.detail);
     }, [diary])
     
@@ -86,7 +85,7 @@ const DiaryDetailPage = () => {
                 <Separator
                     width='100%'
                     height='5px'
-                    backgroundColor='orange'
+                    backgroundColor='#FFD1D1'
                 />
                 <DiaryWrapper>
                     <Title>
@@ -98,7 +97,7 @@ const DiaryDetailPage = () => {
                 </DiaryWrapper><Separator
                     width='100%'
                     height='5px'
-                    backgroundColor='orange'
+                    backgroundColor='#FFD1D1'
                 />
                 <ReplyWrapper>
                     
@@ -173,14 +172,15 @@ const Detail = styled.p`
     font-size: 16px;
     margin: 10px 0;
     overflow-y: auto;
+    border-radius: 5px;
     width: 80%;
-    background-color: wheat;
+    background-color: white;
 `
 
 const DiaryWrapper = styled.div`
     width: 100%;
     height: 65%;
-    background-color: red;
+    background-color: #FFD1D1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -192,7 +192,7 @@ const DiaryWrapper = styled.div`
 const ReplyWrapper = styled.div`
     width: 100%;
     height: 35%;
-    background-color: blue;
+    background-color: #FFD1D1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -203,7 +203,7 @@ const ReplyWrapper = styled.div`
 const MotherWrapper = styled.div`
     width: 80%;
     display: flex;
-    background-color: lavender;
+    background-color: white;
     position: relative;
     align-items: center;
     border-radius: 20px;
@@ -224,7 +224,7 @@ const EmotionWrapper = styled.div`
     position: relative;
     align-items: center;
     border-radius: 20px;
-    background-color: violet;
+    background-color: white;
     padding: 0 10px;
 `;
 

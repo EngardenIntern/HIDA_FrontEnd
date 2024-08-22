@@ -27,6 +27,7 @@ function App() {
           <Route path='/diary/detail' element={<DiaryDetailPage/>} />
           <Route path='/calendar' element={<CalendarPage/>} />
           <Route path='/chat' element={<ChatPage/>} />
+
           
 
         </Routes>

@@ -12,11 +12,14 @@ import CompleteBtn from '../../components/CompleteBtn';
 import Body from '../../components/Body';
 import Nav from '../../components/Nav';
 import axios from '../../api/axios.js'
+import Modal from '../../components/Modal/index.js';
 
 
 const NewDiaryPage = (props) => {
 
   const navigation = new useNavigate();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const userId = localStorage.getItem('userId');
 
@@ -24,14 +27,13 @@ const NewDiaryPage = (props) => {
   const locationTitle = location.state ? location.state.title : '';
   const locationDetail = location.state ? location.state.detail : '';
   const locationDate = location.state ? location.state.date : new Date();
-  const locationMethod = location.state ? location.state.method : 'create';
 
   const [title, setTitle] = useState(locationTitle);
   const [detail, setDetail] = useState(locationDetail);
-  const [diaryDate, setDiaryDate] = useState(locationDate);
+  const [diaryDate, setDiaryDate] = useState(locationDate); // DATE형
+  const [date, setDate] = useState(''); // String형
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
 
-  const [date, setDate] = useState('');
 
   const handleMonthChange = (date) => {
     setSelectedMonth(date.getMonth());
@@ -79,21 +81,28 @@ const NewDiaryPage = (props) => {
 
 
   const handleComplete = async () => {
+    setIsModalOpen(true);
+
     try {
-      const createResopnse = await axios.post(`/diary`, {
-        userId: userId,
-        title: title,
-        detail: detail,
-        diaryDate: date,
-      });
-      console.log('Success', createResopnse)
+        const createResopnse = await axios.post(`/diary`, {
+          userId: userId,
+          title: title,
+          detail: detail,
+          diaryDate: date,
+        });
+        console.log('Success', createResopnse)
+        navigation("/diary/detail", {state: {date: date}});
     } catch (error) {
-      console.error('Request Error:', error);
+        console.error('Request Error:', error);
+    } finally {
+        setIsModalOpen(false);
     }
-    navigation('/diary');
   };
+
+
+
   return (
-    <Container>
+    <Container isModalOpen={isModalOpen}>
       <Header>
         <ReturnBtn />
         <DateWrapper>
@@ -144,6 +153,10 @@ const NewDiaryPage = (props) => {
         </Form>
       </Body>
       <Nav />
+
+      {isModalOpen && (
+        <Modal />
+      )}
     </Container>
   )
 }
@@ -155,7 +168,7 @@ const DateWrapper = styled.div`
   left: 50%;
   transform: translateX(-50%);
   font-family: 'BMJUA';
-  z-index: 9999;
+  z-index: 20;
   
   .react-datepicker__input-container {
     .input-datepicker {

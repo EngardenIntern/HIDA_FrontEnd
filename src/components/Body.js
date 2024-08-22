@@ -19,4 +19,5 @@ const Section = styled.section`
   background-color: #FFD1D1;
   display: flex;
   flex-direction: column;
+  z-index:
 `;

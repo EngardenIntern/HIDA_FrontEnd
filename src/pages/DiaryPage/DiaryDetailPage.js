@@ -155,7 +155,7 @@ const DateWrapper = styled.p`
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 30px;
+    font-size: 1.6rem;
     font-family: 'BMJUA';
     color: black;
 `
@@ -170,7 +170,8 @@ const Title = styled.p`
 
 const Detail = styled.p`
     font-size: 16px;
-    margin: 10px 0;
+    margin: 10px 10px;
+    padding: 10px 15px;
     overflow-y: auto;
     border-radius: 5px;
     width: 80%;

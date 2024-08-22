@@ -52,7 +52,6 @@ export default HomePage
 
 const PetWrapper = styled.div`
     border-radius: 50px;
-
     position: absolute;
     width: 80%;
     height: 50vh;
@@ -66,7 +65,6 @@ const PetImg = styled.img`
     height: 20vh;
     display: block;
     position: absolute;
-    
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
@@ -75,7 +73,6 @@ const PetImg = styled.img`
 
 const MessageWrapper = styled.div`
     border-radius: 50px;
-
     position: absolute;
     width: 100%;
     bottom: 0;

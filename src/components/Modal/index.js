@@ -1,18 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
-import Container from '../Container'
 import { RingLoader } from 'react-spinners'
 
 
-const Modal = () => {
+const Modal = (props) => {
     return (
         <ModalOverlay>
             <ModalWrapper>
                 < RingLoader
                     size={30}
                 />
-                <Text>일기를 읽고<br />답글을 생성 중이에요!</Text>
-                <SubText>(최대 20초가 소요되어요)</SubText>
+                <Text>{props.text}</Text>
+                <SubText>{props.subText}</SubText>
             </ModalWrapper>
         </ModalOverlay>
     )

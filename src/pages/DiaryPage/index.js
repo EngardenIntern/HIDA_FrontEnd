@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Nav from '../../components/Nav';
 import PageTitle from '../../components/PageTitle';
-import DiaryItem from './DiaryItem';
 import { useNavigate } from 'react-router-dom';
 import Container from '../../components/Container';
 import axios from '../../api/axios.js'
+import DiaryItem from '../../components/Diary/DiaryItem.js';
+import DeleteModal from '../../components/Modal/DeleteModal.js';
+import Modal from '../../components/Modal/index.js';
 
 const DiaryPage = () => {
     const navigate = useNavigate();
@@ -13,6 +15,11 @@ const DiaryPage = () => {
     const userId = localStorage.getItem('userId');
     const [diaryList, setDiaryList] = useState([]);
 
+    const [deleteModal, setDeleteModal] = useState(false);
+    const [waitingModal, setWaitingModal] = useState(false);
+    const [deleteDate, setDeleteDate] = useState('');
+
+    
     useEffect(() => {
         fetchDiaryList();
     }, [])
@@ -41,6 +48,8 @@ const DiaryPage = () => {
                         <DiaryItem
                             date={diary.date}
                             title={diary.title}
+                            setDeleteModal={setDeleteModal}
+                            setDeleteDate={setDeleteDate}
                         />
                     )
                 })}
@@ -50,6 +59,20 @@ const DiaryPage = () => {
                 onClick={() => (navigate('/diary/new'))}
             />
             <Nav />
+
+            {deleteModal && 
+                <DeleteModal
+                    date={deleteDate}
+                    setDeleteModal={setDeleteModal}
+                    setWaitingModal={setWaitingModal}
+                />
+            }
+            {waitingModal && 
+                <Modal
+                    text= "일기를 삭제 중이에요."
+                    subText="(최대 20초가 소요되어요)"
+                />
+            }
         </Container>
     )
 }

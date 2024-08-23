@@ -155,7 +155,10 @@ const NewDiaryPage = (props) => {
       <Nav />
 
       {isModalOpen && (
-        <Modal />
+        <Modal
+          text= "일기를 생성 중이에요."
+          subText= "(최대 20초가 소요되어요)"
+        />
       )}
     </Container>
   )

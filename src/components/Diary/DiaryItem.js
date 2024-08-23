@@ -10,7 +10,15 @@ const DiaryItem = (props) => {
     const [day, setDay] = useState("");
     const [dateNum, setDateNum] = useState("");
     const [date, setDate] = useState("");
-    
+
+
+    const handleDeleteClick = () => {
+
+        props.setDeleteDate(props.date);
+        props.setDeleteModal(true);
+
+    }
+
 
     useEffect(() => {
         let dayNum = new Date(props.date).getDay();
@@ -48,13 +56,22 @@ const DiaryItem = (props) => {
     return (
         <div>
             <ItemWrapper
-                onClick={() => naviagtion("/diary/detail", {state: {date: date}})}
             >
-                <DateWrapper>
+                <DateWrapper
+                    onClick={() => naviagtion("/diary/detail", { state: { date: date } })}
+
+                >
                     <DiaryDay>{day}</DiaryDay>
                     <DiaryDate>{dateNum}</DiaryDate>
                 </DateWrapper>
-                <Title>{props.title}</Title>
+                <Title
+                    onClick={() => naviagtion("/diary/detail", { state: { date: date } })}
+
+                >{props.title}</Title>
+                <DeleteBtn
+                    src='icons/delete.png'
+                    onClick={handleDeleteClick}
+                />
 
             </ItemWrapper>
         </div>
@@ -84,6 +101,8 @@ const DiaryDay = styled.p`
     background-color: #D1E9F6;
     margin: 0;
     border-top-left-radius: 10px;
+    border-bottom: 0.5px solid gray;
+
 
 `;
 const DiaryDate = styled.p`
@@ -97,17 +116,27 @@ const DiaryDate = styled.p`
 const Title = styled.p`
     position: absolute;
     height: 100%;
-    width: 70%;
+    width: 60%;
     left: 20%;
     margin: 0;
     padding: 0;
     margin-left: 20px;
     bottom: 0;
     font-size: 30px;
-    
     display: flex;
     align-items: center;
-    
     white-space: nowrap;
     overflow: hidden;
 `;
+
+const DeleteBtn = styled.img`
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 60%;
+    right: 8px;
+    filter: opacity(0.6);
+    z-index: 40;
+    // background-color: yellow;
+    padding: 10px;
+`

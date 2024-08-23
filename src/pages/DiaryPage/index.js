@@ -11,8 +11,6 @@ import Modal from '../../components/Modal/index.js';
 
 const DiaryPage = () => {
     const navigate = useNavigate();
-
-    const userId = localStorage.getItem('userId');
     const [diaryList, setDiaryList] = useState([]);
 
     const [deleteModal, setDeleteModal] = useState(false);
@@ -25,7 +23,7 @@ const DiaryPage = () => {
     }, [])
 
     const fetchDiaryList = async () => {
-        const response = await axios.get(`/diary/${userId}`);
+        const response = await axios.get(`/diary`);
         const list = transformData(response.data);
         setDiaryList(list);
     }

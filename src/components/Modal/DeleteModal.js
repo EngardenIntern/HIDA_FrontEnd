@@ -6,8 +6,7 @@ import axios from '../../api/axios.js'
 
 const DeleteModal = (props) => {
 
-  const ref = useRef();
-  const userId = localStorage.getItem('userId');
+  // const ref = useRef();
   
 //   const sleep = (ms) => {
 //     return new Promise(resolve => setTimeout(resolve, ms));
@@ -17,7 +16,7 @@ const DeleteModal = (props) => {
     props.setDeleteModal(false);
     props.setWaitingModal(true);
     try {
-      const response = await axios.delete(`/diary/${userId}/${props.date}`);
+      const response = await axios.delete(`/diary/${props.date}`);
       console.log('Success',response);
       
       window.location.href = "/diary";

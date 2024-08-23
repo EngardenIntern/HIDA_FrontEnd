@@ -19,7 +19,6 @@ const AuthPage = (props) => {
             }).then((result) => { //백에서 완료후 우리사이트 전용 토큰 넘겨주는게 성공했다면
                 console.log(result);
                 localStorage.setItem("accessToken", result.data.accessToken);
-                localStorage.setItem("userId", result.data.userId);
                 navigate("/home");
             });
         };

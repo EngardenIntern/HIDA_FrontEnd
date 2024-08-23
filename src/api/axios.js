@@ -9,6 +9,7 @@ const instance = axios.create({
     headers: {
         'Content-Type': 'application/json',
     },
+    withCredentials: true,
 })
 
 const logout = () => {
@@ -19,12 +20,11 @@ const logout = () => {
 // refresh token 재발행 요청
 const getRefreshToken = async () => {
     try {
-        const response = await axios.patch({
-            baseURL: REFRESH_URI,
+        const response = await axios.patch(REFRESH_URI, null,{
             headers: {
-                'Content-Type': 'application/json',
-                'RefreshToken': ''
+                'Content-Type': 'application/json'
             },
+            withCredentials: true,
         });
         const accessToken = response.data.accessToken;
         return accessToken;
@@ -40,7 +40,6 @@ instance.interceptors.request.use(
         if (accessToken) {
             config.headers.Authorization = `Bearer ${accessToken}`;
         }
-        withCredentials: true;
         return config;
     },
     (error) => {

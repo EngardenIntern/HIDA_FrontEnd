@@ -8,7 +8,6 @@ import axios from '../../api/axios.js'
 
 const HomePage = () => {
 
-    const userId = localStorage.getItem('userId');
 
     const [count, setCount] = useState(0);
 
@@ -17,7 +16,8 @@ const HomePage = () => {
     }, []);
 
     const fetchCount = async () => {
-        const response = await axios.get(`/user/${userId}`);
+        const response = await axios.get(`/user`);
+        console.log(response);
         setCount(response.data.diaryCount);
     }
 

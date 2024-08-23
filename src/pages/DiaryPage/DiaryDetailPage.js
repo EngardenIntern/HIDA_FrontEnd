@@ -14,8 +14,6 @@ import axios from '../../api/axios.js'
 
 const DiaryDetailPage = () => {
 
-    const userId = localStorage.getItem('userId');
-
     const location = useLocation();
     const navigation = useNavigate();
     const date = `${location.state.date}`
@@ -36,7 +34,7 @@ const DiaryDetailPage = () => {
     }, [diary])
     
     const fetchDiary = async () => {
-        const response = await axios.get(`/diary/${userId}/${date}`);
+        const response = await axios.get(`/diary/${date}`);
         console.log('response', response);
         const diary = transformData(response.data);
         setDiary(diary);

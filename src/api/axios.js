@@ -9,4 +9,29 @@ const instance = axios.create({
     },
 })
 
+const logout = () => {
+    localStorage.removeItem('access_token');
+}
+
+// const getRefreshToken = async () => {
+//     try {
+//         const response = await refresh();
+//         const accessToken = response.data.data?.accessToken;
+//     }
+// }
+
+instance.interceptors.request.use(
+    (config) => {
+        const accessToken = localStorage.getItem('accessToken');
+        if(accessToken){
+            config.headers.Authorization = `Bearer ${accessToken}`;
+        }
+        console.log('request', config);
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    },
+);
+
 export default instance;

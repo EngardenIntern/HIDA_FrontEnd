@@ -21,7 +21,6 @@ const NewDiaryPage = (props) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const userId = localStorage.getItem('userId');
 
   const location = useLocation();
   const locationTitle = location.state ? location.state.title : '';
@@ -60,7 +59,7 @@ const NewDiaryPage = (props) => {
   const fetchDayDiary = async (selectedDate) => {
     try{
       console.log('date', selectedDate);
-      const response = await axios.get(`/diary/${userId}/${selectedDate}`);
+      const response = await axios.get(`/diary/${selectedDate}`);
       console.log('response', response);
       const diary = transformData(response.data);
       setTitle(diary.title);
@@ -85,7 +84,6 @@ const NewDiaryPage = (props) => {
 
     try {
         const createResopnse = await axios.post(`/diary`, {
-          userId: userId,
           title: title,
           detail: detail,
           diaryDate: date,

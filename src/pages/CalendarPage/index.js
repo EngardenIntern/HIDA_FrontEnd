@@ -15,7 +15,6 @@ const CalendarPage = () => {
 
     const navigation = useNavigate();
 
-    const userId = localStorage.getItem('userId');
 
     const [dateList, setDateList] = useState([]);
 
@@ -24,7 +23,7 @@ const CalendarPage = () => {
     }, [])
 
     const fetchDateList = async () => {
-        const response = await axios.get(`/diary/${userId}`);
+        const response = await axios.get(`/diary`);
         const list = transformData(response.data);
         setDateList(list);
     }

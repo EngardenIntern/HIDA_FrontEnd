@@ -104,7 +104,11 @@ const NewDiaryPage = (props) => {
   return (
     <Container isModalOpen={isModalOpen}>
       <Header>
-        <ReturnBtn />
+        <ReturnBtn
+          style={{
+            marginLeft: '10px',
+          }}
+        />
         <DateWrapper>
           <DatePicker
             selected={diaryDate}
@@ -121,6 +125,9 @@ const NewDiaryPage = (props) => {
         </DateWrapper>
         <CompleteBtn
           onClick={handleComplete}
+          style={{
+            marginRight: '10px',
+          }}
         >
           완료
         </CompleteBtn>
@@ -167,9 +174,7 @@ const NewDiaryPage = (props) => {
 export default NewDiaryPage
 
 const DateWrapper = styled.div`
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  width: 40%;
   font-family: 'BMJUA';
   z-index: 20;
   
@@ -182,7 +187,8 @@ const DateWrapper = styled.div`
       font-size: 30px;
       font-family: 'BMJUA';
       background-color: transparent;
-      border-block: none;
+      border-block: 1px solid #ccc;
+      text-align: center;
     }
   }
 `;

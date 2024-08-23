@@ -9,9 +9,9 @@ const DeleteModal = (props) => {
   const ref = useRef();
   const userId = localStorage.getItem('userId');
   
-  const sleep = (ms) => {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+//   const sleep = (ms) => {
+//     return new Promise(resolve => setTimeout(resolve, ms));
+// }
 
   const handleDeleteDiary = async () => {
     props.setDeleteModal(false);

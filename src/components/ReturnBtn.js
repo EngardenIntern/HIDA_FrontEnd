@@ -19,7 +19,6 @@ export default ReturnBtn
 
 
 const BtnImg = styled.img`
-  position: absolute;
+  // position: absolute;
   height: 50%;
-  left: 10px;
 `

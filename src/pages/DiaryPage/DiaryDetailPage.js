@@ -92,7 +92,12 @@ const DiaryDetailPage = () => {
                         {title}
                     </Title>
                     <Detail>
-                        {detail}
+                        {(detail || '').split('\n').map((line, index) => (
+                            <React.Fragment key={index}>
+                                {line}
+                                <br />
+                            </React.Fragment>
+                        ))}
                     </Detail>
                 </DiaryWrapper><Separator
                     width='100%'

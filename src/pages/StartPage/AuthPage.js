@@ -17,6 +17,7 @@ const AuthPage = (props) => {
                     code: code,
                 },
             }).then((result) => { //백에서 완료후 우리사이트 전용 토큰 넘겨주는게 성공했다면
+                localStorage.removeItem('accessToken');
                 localStorage.setItem("accessToken", result.data.accessToken);
                 navigate("/home");
             });

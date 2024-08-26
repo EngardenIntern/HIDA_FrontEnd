@@ -4,7 +4,6 @@ import Container from '../../components/Container'
 import { KAKAO_AUTH_URL } from '../../api/OAuth'
 
 const LoginPage = () => {
-    console.log("kakao", KAKAO_AUTH_URL);
     
     return (
     <Container>

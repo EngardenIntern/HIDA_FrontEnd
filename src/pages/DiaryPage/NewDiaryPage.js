@@ -57,7 +57,7 @@ const NewDiaryPage = (props) => {
   }, [date]);
 
   const fetchDayDiary = async (selectedDate) => {
-    try{
+    try {
       console.log('date', selectedDate);
       const response = await axios.get(`/diary/${selectedDate}`);
       console.log('response', response);
@@ -68,7 +68,7 @@ const NewDiaryPage = (props) => {
       setTitle('');
       setDetail('');
       console.log("해당 날짜에는 데이터가 없습니다.");
-      return ;
+      return;
     }
   }
   const transformData = (data) => {
@@ -83,17 +83,17 @@ const NewDiaryPage = (props) => {
     setIsModalOpen(true);
 
     try {
-        const createResopnse = await axios.post(`/diary`, {
-          title: title,
-          detail: detail,
-          diaryDate: date,
-        });
-        console.log('Success', createResopnse)
-        navigation("/diary/detail", {state: {date: date}});
+      const createResopnse = await axios.post(`/diary`, {
+        title: title,
+        detail: detail,
+        diaryDate: date,
+      });
+      console.log('Success', createResopnse)
+      navigation("/diary/detail", { state: { date: date } });
     } catch (error) {
-        console.error('Request Error:', error);
+      console.error('Request Error:', error);
     } finally {
-        setIsModalOpen(false);
+      setIsModalOpen(false);
     }
   };
 
@@ -108,18 +108,16 @@ const NewDiaryPage = (props) => {
           }}
         />
         <DateWrapper>
-          <DatePicker
-            selected={diaryDate}
-            onChange={(date) => setDiaryDate(date)}
-            locale={ko}
-            dateFormat="MM월 dd일"
-            className='input-datepicker'
-            closeOnScroll={true}
-            onMonthChange={handleMonthChange}
-            font-family="BMJUA"
-          >
-            일기를 작성할 날짜를 선택해주세요.
-          </DatePicker>
+            <DatePicker
+              selected={diaryDate}
+              onChange={(date) => setDiaryDate(date)}
+              locale="ko"
+              dateFormat="MM월 dd일"
+              className="input-datepicker"
+              closeOnScroll={true}
+              onMonthChange={handleMonthChange}
+              customInput={<CustomInput />}
+            />
         </DateWrapper>
         <CompleteBtn
           onClick={handleComplete}
@@ -161,8 +159,8 @@ const NewDiaryPage = (props) => {
 
       {isModalOpen && (
         <Modal
-          text= "일기를 생성 중이에요."
-          subText= "(최대 20초가 소요되어요)"
+          text="일기를 생성 중이에요."
+          subText="(최대 20초가 소요되어요)"
         />
       )}
     </Container>
@@ -172,24 +170,56 @@ const NewDiaryPage = (props) => {
 export default NewDiaryPage
 
 const DateWrapper = styled.div`
-  width: 40%;
+  width: 60%;
   font-family: 'BMJUA';
   z-index: 20;
-  
+
   .react-datepicker__input-container {
     .input-datepicker {
       width: 100%;
-      padding: 10px;
+      padding: 10px 20px 10px 0;
       border-radius: 5px;
       border: 1px solid #ccc;
       font-size: 30px;
-      font-family: 'BMJUA';
       background-color: transparent;
-      border-block: 1px solid #ccc;
       text-align: center;
+      font-family: 'BMJUA';
     }
   }
 `;
+
+const CustomInputWrapper = styled.div`
+  position: relative;
+  display: flex;
+  width: 100%;
+
+  .calendar-icon {
+    position: absolute;
+    top: 50%;
+    right: 5px; /* 아이콘을 오른쪽 끝으로 배치 */
+    transform: translateY(-50%);
+    width: 24px; /* 아이콘 크기 */
+    height: 24px;
+    pointer-events: none;
+    background-image: url('/icons/downArrow.png'); /* 아이콘 이미지 경로 */
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+`;
+
+const CustomInput = React.forwardRef(({ value, onClick }, ref) => (
+  <CustomInputWrapper>
+    <div className="calendar-icon" />
+    <input
+      className="input-datepicker"
+      onClick={onClick}
+      ref={ref}
+      value={value}
+      readOnly
+    />
+  </CustomInputWrapper>
+));
+
 
 const TitleInput = styled.input`
   width: 100%;

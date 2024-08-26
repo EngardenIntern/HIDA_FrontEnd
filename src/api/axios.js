@@ -12,8 +12,24 @@ const instance = axios.create({
     withCredentials: true,
 })
 
-const logout = () => {
-    localStorage.removeItem('accessToken');
+export const logout = async () => {
+    try{
+        const accessToken = localStorage.getItem('accessToken');
+
+        await axios.delete(REFRESH_URI, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${accessToken}`,
+            },
+            withCredentials: true,
+        })
+
+        localStorage.removeItem('accessToken');
+
+    } catch(error){
+        console.error(error);
+        console.log('로그아웃에 실패했습니다.');
+    }
 }
 
 

@@ -3,7 +3,6 @@ import axios from 'axios';
 const SERVER_URI = process.env.REACT_APP_SERVER_URI;
 const REFRESH_URI = process.env.REACT_APP_REFRESH_URI;
 
-
 const instance = axios.create({
     baseURL: `${SERVER_URI}`,
     headers: {
